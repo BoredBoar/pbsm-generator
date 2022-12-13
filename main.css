@@ -28,3 +28,8 @@
   color: inherit;
 }
 
+a, a:hover {
+  text-decoration: none;
+  color:rgba(56, 56, 56, 0.69);
+}
+

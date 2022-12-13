@@ -25,6 +25,8 @@ app.controller('RBCController', function(report, $scope) {
     this.tear_text = '';
     this.ellip = 1;
     this.ellip_text = '';
+    this.nrbc = 1;
+    this.nrbc_text = '';
     $scope.comments = [];
     this.RBC_text = [];
 
@@ -40,6 +42,7 @@ app.controller('RBCController', function(report, $scope) {
       if (tab === 'sphere') {this.sphere = index;}
       if (tab === 'tear') {this.tear = index;}
       if (tab === 'ellip') {this.ellip = index;}
+      if (tab === 'nrbc') {this.nrbc = index;}
       if (tab === 'notAbn') {this.notAbn = !this.notAbn;}
       report('RBC',this.getDescription());
     };
@@ -55,6 +58,7 @@ app.controller('RBCController', function(report, $scope) {
       if (tab === 'sphere') {return this.sphere === index;}
       if (tab === 'tear') {return this.tear === index;}
       if (tab === 'ellip') {return this.ellip === index;}
+      if (tab === 'nrbc') {return this.nrbc ===index;}
       if (tab === 'notAbn') {return this.notAbn;}
     };
     
@@ -93,7 +97,7 @@ app.controller('RBCController', function(report, $scope) {
         else if (this.aniso === 5) {this.aniso_text = '';}
         
       if (this.aniso === this.poik) {
-          this.aniso_text = this.aniso_text.replace('Anisocytosis:', 'Anisocytosis and poiklocytosis: ');
+          this.aniso_text = this.aniso_text.replace('Anisocytosis:', 'Anisocytosis and poikilocytosis: ');
           this.poik_text = '';
           }
         else if (this.poik === 1) {this.poik_text = ' Poikilocytosis: not present';}
@@ -153,11 +157,18 @@ app.controller('RBCController', function(report, $scope) {
         else if (this.ellip === 3) {this.ellip_text = 'Elliptocytes: mildly increased';}
         else if (this.ellip === 4) {this.ellip_text = 'Elliptocytes: moderately increased';}
         else if (this.ellip === 5) {this.ellip_text = 'Elliptocytes: markedly increased';}
+        
+      if(this.nrbc === 1) {this.nrbc_text = '';}
+      else if(this.nrbc === 2) {this.nrbc_text = 'Nucleated red blood cells: not increased';}
+      else if(this.nrbc === 3) {this.nrbc_text = 'Nucleated red blood cells: mildly increased';}
+      else if(this.nrbc === 4) {this.nrbc_text = 'Nucleated red blood cells: moderately increased';}
+      else if(this.nrbc === 5) {this.nrbc_text = 'Nucleated red blood cells: markedly increased';}
       
       
       if(this.sphere_text) {RBC_text.push(this.sphere_text);}
       if(this.tear_text) {RBC_text.push(this.tear_text);}
       if(this.ellip_text) {RBC_text.push(this.ellip_text);}
+      if(this.nrbc_text) {RBC_text.push(this.nrbc_text);}
       
       if(this.notAbn) {RBC_text.push('No significant morphologic abnormalities');}
       
@@ -443,7 +454,7 @@ app.controller('SignatureController', function($scope, report) {
     signature.push( $scope.Name + ', Pathologist');
     signature.push('I have reviewed this slide and composed this report.')
     var date = new Date();
-    signature.push(date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear());
+    signature.push((date.getMonth() + 1 ) + '/' + date.getDate() + '/' + date.getFullYear());
     signature.push('ICD-9: ' + $scope.ICD9s.join(', '));
     return signature;
  };
