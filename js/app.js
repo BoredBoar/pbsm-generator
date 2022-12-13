@@ -455,7 +455,7 @@ app.controller('SignatureController', function($scope, report) {
     signature.push('I have reviewed this slide and composed this report.')
     var date = new Date();
     signature.push((date.getMonth() + 1 ) + '/' + date.getDate() + '/' + date.getFullYear());
-    signature.push('ICD-9: ' + $scope.ICD9s.join(', '));
+    signature.push('ICD-10: ' + $scope.ICD9s.join(', '));
     return signature;
  };
  
