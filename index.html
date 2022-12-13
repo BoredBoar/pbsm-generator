@@ -1,658 +1,1 @@
-<!DOCTYPE html>
-<html ng-app='App'>
-    <head>
-        <title>PBSM template</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-        <link rel='stylesheet' href='main.css'>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
-        <script src='js/checklist-model.js'></script>
-        <script src='js/app.js'></script>
-        
-    </head>
-    
-    <body>
-        <nav class="navbar navbar-inverse navbar-static-top">
-          <div class="container">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="">PBSM Template</a>
-            </div>
-          </div>
-        </nav>
-        
-        <div class='container' id='main'>
-            
-            
-            <div class='jumbotron col-md-5 pull-right' id='jumbo' ng-controller='Reporter'>
-                <h3>Description</h3>
-                <p class='no_pad sr-only' id='line' ng-repeat='line in report track by $index'>{{line}}</p>
-                
-                <textarea type="textarea" id="reportArea"  class='form-control' ng-dblclick='select()'></textarea>
-            </div>
-            
-            <div class='col-md-7 pull-left'>
-              
-              <div class="panel panel-default" id='RBCPanel' ng-controller='RBCController as RBCCtrl'>
-                <div class="panel-heading">
-                  <h3 class="panel-title">RBC Morphology <a data-toggle="collapse" href="#RBCPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>
-                </div>
-                <div class="panel-body collapse in" id='RBCPanelBody'>
-                  
-                  <div id='RBCNum'class='row'>
-                    <label class="col-md-3" style='text-align:right'>RBC number</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('num',1)}" ng-click="RBCCtrl.select('num',1)">Decreased</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('num',2)}" ng-click="RBCCtrl.select('num',2)">Normal</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('num',3)}" ng-click="RBCCtrl.select('num',3)">Increased</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div  id='RBCColor' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Color</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('color',1)}" ng-click="RBCCtrl.select('color',1)">Hypochromic</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('color',2)}" ng-click="RBCCtrl.select('color',2)">Normochromic</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div  id='RBCSize' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Size</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('size',1)}" ng-click="RBCCtrl.select('size',1)">Microcytic</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('size',2)}" ng-click="RBCCtrl.select('size',2)">Normocytic</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('size',3)}" ng-click="RBCCtrl.select('size',3)">Macrocytic</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div  id='RBCAniso' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Anisocytosis</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('aniso',5)}" ng-click="RBCCtrl.select('aniso',5)">N/A</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('aniso',1)}" ng-click="RBCCtrl.select('aniso',1)">Not Present</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('aniso',2)}" ng-click="RBCCtrl.select('aniso',2)">Mild</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('aniso',3)}" ng-click="RBCCtrl.select('aniso',3)">Moderate</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('aniso',4)}" ng-click="RBCCtrl.select('aniso',4)">Marked</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div id='RBCPoik' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Poikilocytosis</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('poik',5)}" ng-click="RBCCtrl.select('poik',5)">N/A</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('poik',1)}" ng-click="RBCCtrl.select('poik',1)">Not Present</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('poik',2)}" ng-click="RBCCtrl.select('poik',2)">Mild</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('poik',3)}" ng-click="RBCCtrl.select('poik',3)">Moderate</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('poik',4)}" ng-click="RBCCtrl.select('poik',4)">Marked</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div id='RBCPolyChrom' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Polychromasia</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('poly',1)}" ng-click="RBCCtrl.select('poly',1)">N/A</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('poly',2)}" ng-click="RBCCtrl.select('poly',2)">Not Increased</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('poly',3)}" ng-click="RBCCtrl.select('poly',3)">Incr. w/ NRBCs</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('poly',4)}" ng-click="RBCCtrl.select('poly',4)">Incr. w/o NRBCs</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div  id='RBCSchist' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Schistocytes</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('schist',1)}" ng-click="RBCCtrl.select('schist',1)">N/A</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('schist',2)}" ng-click="RBCCtrl.select('schist',2)">Not Incr</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('schist',3)}" ng-click="RBCCtrl.select('schist',3)">Rare</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('schist',4)}" ng-click="RBCCtrl.select('schist',4)">1+(0-2/hpf)</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('schist',5)}" ng-click="RBCCtrl.select('schist',5)">2+(2-5/hpf)</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('schist',6)}" ng-click="RBCCtrl.select('schist',6)">3+(>5/hpf)</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div  id='RBCSphere' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Spherocytes</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('sphere',1)}" ng-click="RBCCtrl.select('sphere',1)">N/A</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('sphere',2)}" ng-click="RBCCtrl.select('sphere',2)">Not Increased</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('sphere',3)}" ng-click="RBCCtrl.select('sphere',3)">Mild</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('sphere',4)}" ng-click="RBCCtrl.select('sphere',4)">Moderate</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('sphere',5)}" ng-click="RBCCtrl.select('sphere',5)">Marked</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div id='RBCTear' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Teardrops</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('tear',1)}" ng-click="RBCCtrl.select('tear',1)">N/A</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('tear',2)}" ng-click="RBCCtrl.select('tear',2)">Not Increased</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('tear',3)}" ng-click="RBCCtrl.select('tear',3)">Mild</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('tear',4)}" ng-click="RBCCtrl.select('tear',4)">Moderate</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('tear',5)}" ng-click="RBCCtrl.select('tear',5)">Marked</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div  id='RBCEllip' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Elliptocytes</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('ellip',1)}" ng-click="RBCCtrl.select('ellip',1)">N/A</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('ellip',2)}" ng-click="RBCCtrl.select('ellip',2)">Not Increased</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('ellip',3)}" ng-click="RBCCtrl.select('ellip',3)">Mild</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('ellip',4)}" ng-click="RBCCtrl.select('ellip',4)">Moderate</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('ellip',5)}" ng-click="RBCCtrl.select('ellip',5)">Marked</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div  id='RBCOval' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Ovalocytes</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('oval',1)}" ng-click="RBCCtrl.select('oval',1)">N/A</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('oval',2)}" ng-click="RBCCtrl.select('oval',2)">Not Increased</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('oval',3)}" ng-click="RBCCtrl.select('oval',3)">Mild</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('oval',4)}" ng-click="RBCCtrl.select('oval',4)">Moderate</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('oval',5)}" ng-click="RBCCtrl.select('oval',5)">Marked</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div  id='RBCTaget' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Target Cells</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('target',1)}" ng-click="RBCCtrl.select('target',1)">N/A</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('target',2)}" ng-click="RBCCtrl.select('target',2)">Not Increased</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('target',3)}" ng-click="RBCCtrl.select('target',3)">Mild</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('target',4)}" ng-click="RBCCtrl.select('target',4)">Moderate</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('target',5)}" ng-click="RBCCtrl.select('target',5)">Marked</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div  id='NRBC' class='row'>
-                    <label class="col-md-3" style='text-align:right'>Nucleated RBCs</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('nrbc',1)}" ng-click="RBCCtrl.select('nrbc',1)">N/A</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('nrbc',2)}" ng-click="RBCCtrl.select('nrbc',2)">Not Increased</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('nrbc',3)}" ng-click="RBCCtrl.select('nrbc',3)">Mild</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('nrbc',4)}" ng-click="RBCCtrl.select('nrbc',4)">Moderate</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('nrbc',5)}" ng-click="RBCCtrl.select('nrbc',5)">Marked</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class='row'>
-                    <label class="col-md-3" style='text-align:right'>Miscellaneous</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('notAbn',1)}" ng-click="RBCCtrl.select('notAbn',1)">No Significant Abnormalities</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected('dimorphic',1)}" ng-click="RBCCtrl.select('dimorphic',1)">Dimorphic</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <br>
-                  
-                  <div class='row'>
-                    <div class='col-md-4 pull-left'>
-                      <label>Additional Comments</label>
-                    </div>
-                    <div class="input-group col-md-7" style='margin-bottom: 10px;'>
-                      <input type="text" class="form-control" ng-model='RBCcomment'>
-                      <div class="input-group-btn">
-                        <button type='button' class='btn btn-primary' ng-click='addComment()'>Add</button>
-                      </div>
-                    </div><!-- /input-group -->
-                    <div class='col-md-8 col-md-offset-3'>
-                      <ul>
-                        <li ng-repeat='comment in comments' ng-click='remove($index)'><a href=''>{{comment}}</a></li>
-                      </ul>
-                    </div>
-                  </div>  
-               
-                  
-                </div>   <!--close panel body-->
-              </div>
-              
-              <div class="panel panel-default" id='WBCPanel' ng-controller='WBCController as WBCCtrl'>
-                <div class="panel-heading">
-                  <h3 class="panel-title">WBC Morphology <a data-toggle="collapse" href="#WBCPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>
-                </div>
-                <div class="panel-body collapse in" id="WBCPanelBody">
-                  <div class='row'>
-                    <label class="col-md-3" style='text-align:right'>WBC Count</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:WBCCtrl.isSelected('num',1)}" ng-click="WBCCtrl.select('num',1)">Decreased</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:WBCCtrl.isSelected('num',2)}" ng-click="WBCCtrl.select('num',2)">Normal</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:WBCCtrl.isSelected('num',3)}" ng-click="WBCCtrl.select('num',3)">Increased</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <label class='col-md-3' style='text-align:right'>Morphology</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:WBCCtrl.isSelected('morph',1)}" ng-click="WBCCtrl.select('morph',1)">Normal</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:WBCCtrl.isSelected('morph',2)}" ng-click="WBCCtrl.select('morph',2)">Abnormal</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <label class='col-md-3' style='text-align:right'>Abnormal Cells</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-disabled="WBCCtrl.isSelected('morph',1)" ng-class="{active:WBCCtrl.dysp}" ng-click="WBCCtrl.select('dysp',1)">Dysplastic Granulocytes</a>
-                        <a type="button" class="btn btn-default" ng-disabled="WBCCtrl.isSelected('morph',1)" ng-class="{active:WBCCtrl.immature}" ng-click="WBCCtrl.select('immature',2)">Imm. Granulocytes</a>
-                      </div>  
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">  
-                        <a type="button" class="btn btn-default" ng-disabled="WBCCtrl.isSelected('morph',1)" ng-class="{active:WBCCtrl.atyp}" ng-click="WBCCtrl.select('atyp',1)">Atypical Lymphs</a>
-                        <a type="button" class="btn btn-default" ng-disabled="WBCCtrl.isSelected('morph',1)" ng-class="{active:WBCCtrl.reactive}" ng-click="WBCCtrl.select('reactive',2)">Reactive Lymphs</a>
-                      </div>
-                      <form class='form-inline'>
-                        <div class="btn-group btn-group-sm" role="group">
-                          <button type="button" class="btn btn-default" ng-disabled="WBCCtrl.isSelected('morph',1)" ng-class="{active:WBCCtrl.blasts}" ng-click="WBCCtrl.select('blasts',1)">Blasts</button>
-                          <input type='text' class='form-control input-sm' ng-disabled="WBCCtrl.isSelected('morph',1)" ng-show='WBCCtrl.blasts' placeholder='% Blasts' ng-model='WBCCtrl.numOfBlasts' ng-change="WBCCtrl.select('N/A',1)"/>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  
-                  <br>
-                  
-                  <div class="row">
-                    <div class='col-md-4 pull-left'>
-                      <label>Additional Comments</label>
-                    </div>
-                      <div class="input-group col-md-7" style='margin-bottom: 10px;'>
-                        <input type="text" class="form-control" ng-model='WBCcomment'>
-                        <div class="input-group-btn">
-                          <button type='button' class='btn btn-primary' ng-click='addComment()'>Add</button>
-                        </div>
-                      </div><!-- /input-group -->
-                      <div class='col-md-8 col-md-offset-3'>
-                        <ul>
-                          <li ng-repeat='comment in comments' ng-click='remove($index)'><a href=''>{{comment}}</a></li>
-                        </ul>
-                      </div>
-                  </div>
-                  
-                </div>
-              </div>
-              
-              <div class="panel panel-default" ng-controller='PlateletController as PltCtrl'>
-                <div class="panel-heading">
-                  <h3 class="panel-title">Platelet Morphology <a data-toggle="collapse" href="#PltPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>
-                </div>
-                <div class="panel-body collapse in" id="PltPanelBody">
-                  <div class='row'>
-                    <label class='col-md-3' style='text-align:right'>Platelets</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:PltCtrl.isSelected('num',1)}" ng-click="PltCtrl.select('num',1)">Decreased</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:PltCtrl.isSelected('num',2)}" ng-click="PltCtrl.select('num',2)">Normal</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:PltCtrl.isSelected('num',3)}" ng-click="PltCtrl.select('num',3)">Increased</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <label class='col-md-3' style='text-align:right'>Morphology</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:norm}" ng-click="PltCtrl.select('norm',1)">Normal</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:large}" ng-click="PltCtrl.select('large',2)">Large</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:giant}" ng-click="PltCtrl.select('giant',3)">Giant</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:hypo}" ng-click="PltCtrl.select('hypo',4)">Hypogranular</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <label class='col-md-3' style='text-align:right'>Clumping</label>
-                    <div class='col-sm-9'>
-                      <div class="btn-group btn-group-sm btn-group-justified" role="group">
-                        <a type="button" class="btn btn-default" ng-class="{active:PltCtrl.isSelected('clumps',1)}" ng-click="PltCtrl.select('clumps',1)">None</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:PltCtrl.isSelected('clumps',2)}" ng-click="PltCtrl.select('clumps',2)">Rare</a>
-                        <a type="button" class="btn btn-default" ng-class="{active:PltCtrl.isSelected('clumps',3)}" ng-click="PltCtrl.select('clumps',3)">Significant</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <br>
-                  
-                  <div class='row'>
-                    <div class='col-md-4'>
-                      <label>Additional Comments</label>
-                    </div>
-                      <div class="input-group col-md-7">
-                        <input type="text" class="form-control" ng-model='PLTcomment'>
-                        <div class="input-group-btn">
-                          <button type='button' class='btn btn-primary' ng-click='addComment()'>Add</button>
-                        </div>
-                      </div><!-- /input-group -->
-                      <div class='col-md-8 col-md-offset-3'>
-                        <ul>
-                          <li ng-repeat='comment in comments' ng-click='remove($index)'><a href=''>{{comment}}</a></li>
-                        </ul>
-                      </div>
-                  </div>
-                  
-                  
-                </div>
-              </div>
-              
-              <div class="panel panel-default" ng-controller='ImpressionController'>
-                <div class="panel-heading">
-                  <h3 class="panel-title">Impression <a data-toggle="collapse" href="#ImpPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>
-                </div>
-                <div class="panel-body collapse in" id='ImpPanelBody'>
-                  <div class="row">
-                    <div class="col-md-12" style='margin-bottom: 10px;'>
-                      <div class="input-group">
-                        <div class="input-group-btn">
-                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Diagnosis <span class="caret"></span></button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="" ng-click="addDiagnosis('Hypochromic, normocytic anemia')">Hypochromic, normocytic anemia</a></li>
-                            <li><a href="" ng-click="addDiagnosis('Normochromic, normocytic anemia')">Normochromic, normocytic anemia</a></li>
-                            <li class="divider"></li>
-                            <li><a href="" ng-click="addDiagnosis('Leukocytosis')">Leukocytosis</a></li>
-                            <li><a href="" ng-click="addDiagnosis('Leukocytopenia')">Leukopenia</a></li>
-                            <li class="divider"></li>
-                            <li><a href= "" ng-click="addDiagnosis('Thrombocytosis')">Thrombocytosis</a></li>
-                            <li><a href="" ng-click="addDiagnosis('Thrombocytopenia')">Thrombopenia</a></li>
-                          </ul>
-                        </div><!-- /btn-group -->
-                        <input type="text" class="form-control" ng-model='DiagnosisText'>
-                        <div class="input-group-btn">
-                          <button type='button' class='btn btn-primary' ng-click='addToImpression(DiagnosisText)'>Add</button>
-                        </div>
-                      </div><!-- /input-group -->
-                    </div><!-- /.col-lg-6 -->
-                </div>
-                
-                <div class="row">
-                  <div class='col-md-12'>
-                    <ul ng-if='impressions.length > 0'>
-                      <li ng-repeat='impression in impressions' ng-click='$parent.remove($index)'>
-                        <a href=''>{{impression}}</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              
-          </div>
-          
-              <div class="panel panel-default" id='CommentPanel' ng-controller='CommentController'>
-                <div class="panel-heading">
-                  <h3 class="panel-title">Comments <a data-toggle="collapse" href="#CommPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3> 
-                </div>
-                <div class="panel-body collapse in" id='CommPanelBody'>
-                  <form>
-                    <div class="form-group">
-                      <label>Opening Text</label>
-                      <textarea class="form-control" rows='2' placeholder="Enter Opening Comments" ng-model='XComments1'></textarea>
-                    </div>
-                    <table class='table table-condensed'>
-                      <thead>
-                        <tr>
-                          <th>RBC Comments</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='NormoChromicAnemia' ng-click='buildComments()'> Normochromic Anemia</td>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='Schists' ng-click='buildComments()'> Schistocytes</td>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='Spherocytes' ng-click='buildComments()'> Spherocytes</td>
-                          <td class=><input type="checkbox" ng-model='MicrocyticAnemia' ng-click='buildComments()'> Microcytic Anemia</td>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='MacrocyticAnemia' ng-click='buildComments()'> Macrocytic Anemia</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table class='table table-condensed'>
-                      <thead>
-                        <tr>
-                          <th>WBC Comments</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='Leukopenia' ng-click='buildComments()'> Leukopenia</td>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='Neutrophilia' ng-click='buildComments()'> Neutrophilia</td>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='lympocytosis' ng-click='buildComments()'> Lympocytosis</td>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='lymphopenia' ng-click='buildComments()'> Lymphopenia</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" ng-model='BlastComment' ng-click='buildComments()'> Blast, acute leukemia</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table class='table table-condensed'>
-                      <thead>
-                        <tr>
-                          <th>Plt Comments</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='thrombocytopenia' ng-click='buildComments()'> Thrombocytopenia</td>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='thrombocytopeniaNeo' ng-click='buildComments()'> Thrombocytopenia, neonatal</td>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='TTP' ng-click='buildComments()'> Thrombocytopenia, TTP/HUS/HELLP</td>
-                          <td><input type="checkbox" ng-model='ThromboReactive' ng-click='buildComments()'> Thrombocytosis</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table class='table table-condensed'>
-                      <thead>
-                        <tr>
-                          <th>Other Comments</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='pancytopenia' ng-click='buildComments()'> Pancytopenia</td>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='pancytopeniaBMT' ng-click='buildComments()'> Pancytopenia, post BMT</td>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" ng-model='LGL' ng-click='buildComments()'> LGL comment</td>
-                          <td><input type="checkbox" ng-model='Haptoglobin' ng-click='buildComments()'> Increased haptoglobin</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    
-                    <div class="form-group">
-                      <label>Closing Text</label>
-                      <textarea class="form-control" rows='2' placeholder="Enter Closing Comments... if needed" ng-model='XComments2'></textarea>
-                    </div>
-  
-                  </form>
-                  <p>{{XComments + " " + comments}}</p>
-                </div>
-              </div>
-              
-              <div class="panel panel-default" ng-controller='SignatureController'>
-                <div class="panel-heading">
-                  <h3 class="panel-title">Signature <a data-toggle="collapse" href="#SigPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>
-                </div>
-                <div class="panel-body collapse in" id='SigPanelBody'>
-                  <form class='form-horizontal'>
-                    <div class="form-group">
-                      <div>
-                        <label class='col-sm-4 control-label'>Pathologist Name</label>
-                          <div class='col-sm-8'>
-                            <input type="text" class="form-control" ng-model='Name' ng-change='UpdateSignature()'>
-                          </div>
-                      </div>
-                      <div>
-                        <label class='col-sm-4 control-label'>Resident?</label>
-                        <div class='col-sm-8'>
-                          <input type='checkbox' style='margin-top:10px' ng-model='resident'>
-                        </div>
-                        <label class='col-sm-8 control-label'>&nbsp;</label>
-                      </div>
-                      <div ng-show='resident'>
-                        <label class='col-sm-4 control-label' >Resident Name</label>
-                        <div class='col-sm-8'>
-                          <input type='text' class="form-control" ng-model='resName' ng-change='UpdateSignature()'>
-                        </div>
-                      </div>
-                    </div>
-                       <table class="table table-condensed">
-                      <thead>
-                        <tr>
-                          <th>ICD-10 Codes</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th>RBC Findings</th>
-                        </tr>
-                        <tr>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D64.9" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D64.9 Normocytic anemia w/o blood loss</td>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D53.9" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D53.9 Macrocytic anemia</td>
-                        </tr>
-                        <tr>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D50.9" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D50.9 Microcytic anemia/ Fe deficiency</td>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D57.1" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D57.1 Sickle cell disease, unspecified</td>
-                        </tr>
-                        <tr>
-                          <th>WBC Findings</th>
-                        </tr>
-                        <tr>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D72.829" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D72.829 Leukocytosis, unspecified</td>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D72.1" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D72.1 Leukocytosis, eosinophilic</td>
-                        </tr>
-                        <tr>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D72.828" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D72.828 Other elevated white blood cell count</td>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D72.819" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D72.819 Leukocytopenia, unspecified</td>
-                        </tr>
-                        <tr>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D70.9" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D70.9 Neutropenia, unspecified</td>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D72.810" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D72.810 Lymphocytopenia</td>
-                        </tr>
-                        <tr>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D72.818" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D72.818 Leukopenia (basophilic, eosinophilic, monocytopenia, or plasmacytopenia)</td>
-                        </tr>
-                        <tr>
-                          <th>Platelet Findings</th>
-                        </tr>
-                        <tr>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D69.6" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D69.6 Thrombocytopenia, unspecified</td>
-                        </tr>
-                        <tr>
-                          <th>Other</th>
-                        </tr>
-                        <tr>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D61.818" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D61.818 Pancytopenia, "other"</td>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="D75.9" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> D75.9 Unspecified diseases of blood and blood-forming organs</td>
-                        </tr>
-                        <tr>
-                          <td class="tdwidth tdw"><input type="checkbox" checklist-value="'Z00.00'" ng-click="UpdateSignature()" ng-model="checked" class="ng-scope ng-pristine ng-untouched ng-valid"> Z00.00 Laboratory examination, unspecified</td>
-                        </tr>
-                      </tbody>
-                    </table>
-<!--
-                    <table class='table table-condensed'>
-                      <thead>
-                        <tr>
-                          <th>ICD9 Codes</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th>RBC Findings</th>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='285.9' ng-click='UpdateSignature()'> 285.9 Normocytic anemia w/o blood loss</td>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='281.9' ng-click='UpdateSignature()'> 281.9 Macrocytic anemia</td>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='280.9' ng-click='UpdateSignature()'> 280.9 Microcytic anemia/ Fe deficiency</td>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='282.60' ng-click='UpdateSignature()'> 282.60 Sickle cell disease, unspecified</td>
-                        </tr>
-                        <tr>
-                          <th>WBC Findings</th>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='288.60' ng-click='UpdateSignature()'> 288.60 Leukocytosis, unspecified</td>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='288.3' ng-click='UpdateSignature()'> 288.3 Leukocytosis, eosinophilic</td>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='288.69' ng-click='UpdateSignature()'> 288.69 Other elevated white blood cell count</td>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='288.50' ng-click='UpdateSignature()'> 288.50 Leukocytopenia, unspecified</td>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='288.00' ng-click='UpdateSignature()'> 288.00 Neutropenia, unspecified</td>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='288.51' ng-click='UpdateSignature()'> 288.51 Lymphocytopenia</td>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='288.59' ng-click='UpdateSignature()'> 288.59 Leukopenia (basophilic, eosinophilic, monocytopenia, or plasmacytopenia)</td>
-                        </tr>
-                        <tr>
-                          <th>Platelet Findings</th>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='287.5' ng-click='UpdateSignature()'> 287.5 Thrombocytopenia, unspecified</td>
-                        </tr>
-                        <tr>
-                          <th>Other</th>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='284.19' ng-click='UpdateSignature()'> 284.19 Pancytopenia, "other"</td>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value='289.9' ng-click='UpdateSignature()'> 289.9 Unspecified diseases of blood and blood-forming organs</td>
-                        </tr>
-                        <tr>
-                          <td class='tdwidth tdw'><input type="checkbox" checklist-model='ICD9s' checklist-value="'V72.60'" ng-click='UpdateSignature()'> V72.60 Laboratory examination, unspecified</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    
--->                    
-                  </form>
-                </div>
-                <!--    <div class="col-md-12">-->
-                <!--      <div class="input-group">-->
-                <!--        <label>Pathologist Name</label>-->
-                <!--        <input type="text" class="form-control" ng-model='Name' ng-change='UpdateSignature()'>-->
-                <!--        <br>-->
-                <!--        <input type='checkbox' ng-model='resident'><label>Resident?</label>-->
-                <!--        <br>-->
-                <!--        <label ng-show='resident'>Resident Name</label>-->
-                <!--        <input type='text' ng-show='resident' ng-model='resName'>-->
-                <!--      </div><!-- /input-group -->
-                <!--    </div><!-- /.col-lg-6 -->
-                <!--</div>-->
-              
-          </div>
-  
-    </body>
-</html>
+<!DOCTYPE html><!-- saved from url=(0068)http://www.ouhsc.edu/pathologyresidency/posters/websites/peripheral/ --><html ng-app="App" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>        <title>PBSM template</title>        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">        <link rel="stylesheet" href="main.css">        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>        <script src="js/checklist-model.js"></script>        <script src="js/app.js"></script>    </head>    <body>        <nav class="navbar navbar-inverse navbar-static-top">          <div class="container">            <div class="navbar-header">              <a class="navbar-brand" href="">PBSM Template</a>            </div>          </div>        </nav>        <div class="container" id="main">            <div class="jumbotron col-md-5 pull-right ng-scope" id="jumbo" ng-controller="Reporter">                <h3>Description</h3>                <!-- ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">MORPHOLOGY:</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">&nbsp;&nbsp;Red Blood Cells:</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">&nbsp;&nbsp;&nbsp;&nbsp;*Normal in number, normochromic, and normocytic</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">&nbsp;&nbsp;White Blood Cells:</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">&nbsp;&nbsp;&nbsp;&nbsp;*Normal in number</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">&nbsp;&nbsp;&nbsp;&nbsp;*No circulating blasts, atypical lymphoid cells, or </p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">&nbsp;&nbsp;&nbsp;&nbsp; dysplastic changes are identified.  </p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">&nbsp;&nbsp;Platelets:</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">&nbsp;&nbsp;&nbsp;&nbsp;*Normal in number</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">&nbsp;&nbsp;&nbsp;&nbsp;*Morphology: normal</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">&nbsp;&nbsp;&nbsp;&nbsp;*Platelet clumps: not present</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index"></p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index"></p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index"></p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">___________________</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">[Insert Name], Pathologist</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">I have reviewed this slide and composed this report.</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">10/1/2015</p><!-- end ngRepeat: line in report track by $index --><p class="no_pad sr-only ng-binding ng-scope" id="line" ng-repeat="line in report track by $index">ICD-9: </p><!-- end ngRepeat: line in report track by $index -->                <textarea type="textarea" id="reportArea" class="form-control" ng-dblclick="select()"></textarea>            </div>            <div class="col-md-7 pull-left">              <div class="panel panel-default ng-scope" id="RBCPanel" ng-controller="RBCController as RBCCtrl">                <div class="panel-heading">                  <h3 class="panel-title">RBC Morphology <a data-toggle="collapse" href="http://www.ouhsc.edu/pathologyresidency/posters/websites/peripheral/#RBCPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>                </div>                <div class="panel-body collapse in" id="RBCPanelBody">                  <div id="RBCNum" class="row">                    <label class="col-md-3" style="text-align:right">RBC number</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;num&#39;,1)}" ng-click="RBCCtrl.select(&#39;num&#39;,1)">Decreased</a>                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;num&#39;,2)}" ng-click="RBCCtrl.select(&#39;num&#39;,2)">Normal</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;num&#39;,3)}" ng-click="RBCCtrl.select(&#39;num&#39;,3)">Increased</a>                      </div>                    </div>                  </div>                  <div id="RBCColor" class="row">                    <label class="col-md-3" style="text-align:right">Color</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;color&#39;,1)}" ng-click="RBCCtrl.select(&#39;color&#39;,1)">Hypochromic</a>                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;color&#39;,2)}" ng-click="RBCCtrl.select(&#39;color&#39;,2)">Normochromic</a>                      </div>                    </div>                  </div>                  <div id="RBCSize" class="row">                    <label class="col-md-3" style="text-align:right">Size</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;size&#39;,1)}" ng-click="RBCCtrl.select(&#39;size&#39;,1)">Microcytic</a>                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;size&#39;,2)}" ng-click="RBCCtrl.select(&#39;size&#39;,2)">Normocytic</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;size&#39;,3)}" ng-click="RBCCtrl.select(&#39;size&#39;,3)">Macrocytic</a>                      </div>                    </div>                  </div>                  <div id="RBCAniso" class="row">                    <label class="col-md-3" style="text-align:right">Anisocytosis</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;aniso&#39;,5)}" ng-click="RBCCtrl.select(&#39;aniso&#39;,5)">N/A</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;aniso&#39;,1)}" ng-click="RBCCtrl.select(&#39;aniso&#39;,1)">Not Present</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;aniso&#39;,2)}" ng-click="RBCCtrl.select(&#39;aniso&#39;,2)">Mild</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;aniso&#39;,3)}" ng-click="RBCCtrl.select(&#39;aniso&#39;,3)">Moderate</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;aniso&#39;,4)}" ng-click="RBCCtrl.select(&#39;aniso&#39;,4)">Marked</a>                      </div>                    </div>                  </div>                  <div id="RBCPoik" class="row">                    <label class="col-md-3" style="text-align:right">Poikilocytosis</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;poik&#39;,5)}" ng-click="RBCCtrl.select(&#39;poik&#39;,5)">N/A</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;poik&#39;,1)}" ng-click="RBCCtrl.select(&#39;poik&#39;,1)">Not Present</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;poik&#39;,2)}" ng-click="RBCCtrl.select(&#39;poik&#39;,2)">Mild</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;poik&#39;,3)}" ng-click="RBCCtrl.select(&#39;poik&#39;,3)">Moderate</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;poik&#39;,4)}" ng-click="RBCCtrl.select(&#39;poik&#39;,4)">Marked</a>                      </div>                    </div>                  </div>                  <div id="RBCPolyChrom" class="row">                    <label class="col-md-3" style="text-align:right">Polychromasia</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;poly&#39;,1)}" ng-click="RBCCtrl.select(&#39;poly&#39;,1)">N/A</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;poly&#39;,2)}" ng-click="RBCCtrl.select(&#39;poly&#39;,2)">Not Increased</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;poly&#39;,3)}" ng-click="RBCCtrl.select(&#39;poly&#39;,3)">Incr. w/ NRBCs</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;poly&#39;,4)}" ng-click="RBCCtrl.select(&#39;poly&#39;,4)">Incr. w/o NRBCs</a>                      </div>                    </div>                  </div>                  <div id="RBCSchist" class="row">                    <label class="col-md-3" style="text-align:right">Schistocytes</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;schist&#39;,1)}" ng-click="RBCCtrl.select(&#39;schist&#39;,1)">N/A</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;schist&#39;,2)}" ng-click="RBCCtrl.select(&#39;schist&#39;,2)">Not Incr</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;schist&#39;,3)}" ng-click="RBCCtrl.select(&#39;schist&#39;,3)">Rare</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;schist&#39;,4)}" ng-click="RBCCtrl.select(&#39;schist&#39;,4)">1+(0-2/hpf)</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;schist&#39;,5)}" ng-click="RBCCtrl.select(&#39;schist&#39;,5)">2+(2-5/hpf)</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;schist&#39;,6)}" ng-click="RBCCtrl.select(&#39;schist&#39;,6)">3+(&gt;5/hpf)</a>                      </div>                    </div>                  </div>                  <div id="RBCSphere" class="row">                    <label class="col-md-3" style="text-align:right">Spherocytes</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;sphere&#39;,1)}" ng-click="RBCCtrl.select(&#39;sphere&#39;,1)">N/A</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;sphere&#39;,2)}" ng-click="RBCCtrl.select(&#39;sphere&#39;,2)">Not Increased</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;sphere&#39;,3)}" ng-click="RBCCtrl.select(&#39;sphere&#39;,3)">Mild</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;sphere&#39;,4)}" ng-click="RBCCtrl.select(&#39;sphere&#39;,4)">Moderate</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;sphere&#39;,5)}" ng-click="RBCCtrl.select(&#39;sphere&#39;,5)">Marked</a>                      </div>                    </div>                  </div>                  <div id="RBCTear" class="row">                    <label class="col-md-3" style="text-align:right">Teardrops</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;tear&#39;,1)}" ng-click="RBCCtrl.select(&#39;tear&#39;,1)">N/A</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;tear&#39;,2)}" ng-click="RBCCtrl.select(&#39;tear&#39;,2)">Not Increased</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;tear&#39;,3)}" ng-click="RBCCtrl.select(&#39;tear&#39;,3)">Mild</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;tear&#39;,4)}" ng-click="RBCCtrl.select(&#39;tear&#39;,4)">Moderate</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;tear&#39;,5)}" ng-click="RBCCtrl.select(&#39;tear&#39;,5)">Marked</a>                      </div>                    </div>                  </div>                  <div id="RBCEllip" class="row">                    <label class="col-md-3" style="text-align:right">Elliptocytes</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;ellip&#39;,1)}" ng-click="RBCCtrl.select(&#39;ellip&#39;,1)">N/A</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;ellip&#39;,2)}" ng-click="RBCCtrl.select(&#39;ellip&#39;,2)">Not Increased</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;ellip&#39;,3)}" ng-click="RBCCtrl.select(&#39;ellip&#39;,3)">Mild</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;ellip&#39;,4)}" ng-click="RBCCtrl.select(&#39;ellip&#39;,4)">Moderate</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;ellip&#39;,5)}" ng-click="RBCCtrl.select(&#39;ellip&#39;,5)">Marked</a>                      </div>                    </div>                  </div>                  <div id="RBCOval" class="row">                    <label class="col-md-3" style="text-align:right">Ovalocytes</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;oval&#39;,1)}" ng-click="RBCCtrl.select(&#39;oval&#39;,1)">N/A</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;oval&#39;,2)}" ng-click="RBCCtrl.select(&#39;oval&#39;,2)">Not Increased</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;oval&#39;,3)}" ng-click="RBCCtrl.select(&#39;oval&#39;,3)">Mild</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;oval&#39;,4)}" ng-click="RBCCtrl.select(&#39;oval&#39;,4)">Moderate</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;oval&#39;,5)}" ng-click="RBCCtrl.select(&#39;oval&#39;,5)">Marked</a>                      </div>                    </div>                  </div>                  <div id="RBCTaget" class="row">                    <label class="col-md-3" style="text-align:right">Target Cells</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;target&#39;,1)}" ng-click="RBCCtrl.select(&#39;target&#39;,1)">N/A</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;target&#39;,2)}" ng-click="RBCCtrl.select(&#39;target&#39;,2)">Not Increased</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;target&#39;,3)}" ng-click="RBCCtrl.select(&#39;target&#39;,3)">Mild</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;target&#39;,4)}" ng-click="RBCCtrl.select(&#39;target&#39;,4)">Moderate</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;target&#39;,5)}" ng-click="RBCCtrl.select(&#39;target&#39;,5)">Marked</a>                      </div>                    </div>                  </div>                  <div id="NRBC" class="row">                    <label class="col-md-3" style="text-align:right">Nucleated RBCs</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:RBCCtrl.isSelected(&#39;nrbc&#39;,1)}" ng-click="RBCCtrl.select(&#39;nrbc&#39;,1)">N/A</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;nrbc&#39;,2)}" ng-click="RBCCtrl.select(&#39;nrbc&#39;,2)">Not Increased</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;nrbc&#39;,3)}" ng-click="RBCCtrl.select(&#39;nrbc&#39;,3)">Mild</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;nrbc&#39;,4)}" ng-click="RBCCtrl.select(&#39;nrbc&#39;,4)">Moderate</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;nrbc&#39;,5)}" ng-click="RBCCtrl.select(&#39;nrbc&#39;,5)">Marked</a>                      </div>                    </div>                  </div>                  <div class="row">                    <label class="col-md-3" style="text-align:right">Miscellaneous</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;notAbn&#39;,1)}" ng-click="RBCCtrl.select(&#39;notAbn&#39;,1)">No Significant Abnormalities</a>                        <a type="button" class="btn btn-default" ng-class="{active:RBCCtrl.isSelected(&#39;dimorphic&#39;,1)}" ng-click="RBCCtrl.select(&#39;dimorphic&#39;,1)">Dimorphic</a>                      </div>                    </div>                  </div>                  <br>                  <div class="row">                    <div class="col-md-4 pull-left">                      <label>Additional Comments</label>                    </div>                    <div class="input-group col-md-7" style="margin-bottom: 10px;">                      <input type="text" class="form-control ng-pristine ng-untouched ng-valid" ng-model="RBCcomment">                      <div class="input-group-btn">                        <button type="button" class="btn btn-primary" ng-click="addComment()">Add</button>                      </div>                    </div><!-- /input-group -->                    <div class="col-md-8 col-md-offset-3">                      <ul>                        <!-- ngRepeat: comment in comments -->                      </ul>                    </div>                  </div>                </div>   <!--close panel body-->              </div>              <div class="panel panel-default ng-scope" id="WBCPanel" ng-controller="WBCController as WBCCtrl">                <div class="panel-heading">                  <h3 class="panel-title">WBC Morphology <a data-toggle="collapse" href="http://www.ouhsc.edu/pathologyresidency/posters/websites/peripheral/#WBCPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>                </div>                <div class="panel-body collapse in" id="WBCPanelBody">                  <div class="row">                    <label class="col-md-3" style="text-align:right">WBC Count</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default" ng-class="{active:WBCCtrl.isSelected(&#39;num&#39;,1)}" ng-click="WBCCtrl.select(&#39;num&#39;,1)">Decreased</a>                        <a type="button" class="btn btn-default active" ng-class="{active:WBCCtrl.isSelected(&#39;num&#39;,2)}" ng-click="WBCCtrl.select(&#39;num&#39;,2)">Normal</a>                        <a type="button" class="btn btn-default" ng-class="{active:WBCCtrl.isSelected(&#39;num&#39;,3)}" ng-click="WBCCtrl.select(&#39;num&#39;,3)">Increased</a>                      </div>                    </div>                  </div>                  <div class="row">                    <label class="col-md-3" style="text-align:right">Morphology</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:WBCCtrl.isSelected(&#39;morph&#39;,1)}" ng-click="WBCCtrl.select(&#39;morph&#39;,1)">Normal</a>                        <a type="button" class="btn btn-default" ng-class="{active:WBCCtrl.isSelected(&#39;morph&#39;,2)}" ng-click="WBCCtrl.select(&#39;morph&#39;,2)">Abnormal</a>                      </div>                    </div>                  </div>                  <div class="row">                    <label class="col-md-3" style="text-align:right">Abnormal Cells</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default" ng-disabled="WBCCtrl.isSelected(&#39;morph&#39;,1)" ng-class="{active:WBCCtrl.dysp}" ng-click="WBCCtrl.select(&#39;dysp&#39;,1)" disabled="disabled">Dysplastic Granulocytes</a>                        <a type="button" class="btn btn-default" ng-disabled="WBCCtrl.isSelected(&#39;morph&#39;,1)" ng-class="{active:WBCCtrl.immature}" ng-click="WBCCtrl.select(&#39;immature&#39;,2)" disabled="disabled">Imm. Granulocytes</a>                      </div>                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default" ng-disabled="WBCCtrl.isSelected(&#39;morph&#39;,1)" ng-class="{active:WBCCtrl.atyp}" ng-click="WBCCtrl.select(&#39;atyp&#39;,1)" disabled="disabled">Atypical Lymphs</a>                        <a type="button" class="btn btn-default" ng-disabled="WBCCtrl.isSelected(&#39;morph&#39;,1)" ng-class="{active:WBCCtrl.reactive}" ng-click="WBCCtrl.select(&#39;reactive&#39;,2)" disabled="disabled">Reactive Lymphs</a>                      </div>                      <form class="form-inline ng-pristine ng-valid">                        <div class="btn-group btn-group-sm" role="group">                          <button type="button" class="btn btn-default" ng-disabled="WBCCtrl.isSelected(&#39;morph&#39;,1)" ng-class="{active:WBCCtrl.blasts}" ng-click="WBCCtrl.select(&#39;blasts&#39;,1)" disabled="disabled">Blasts</button>                          <input type="text" class="form-control input-sm ng-pristine ng-untouched ng-valid ng-hide" ng-disabled="WBCCtrl.isSelected(&#39;morph&#39;,1)" ng-show="WBCCtrl.blasts" placeholder="% Blasts" ng-model="WBCCtrl.numOfBlasts" ng-change="WBCCtrl.select(&#39;N/A&#39;,1)" disabled="disabled">                        </div>                      </form>                    </div>                  </div>                  <br>                  <div class="row">                    <div class="col-md-4 pull-left">                      <label>Additional Comments</label>                    </div>                      <div class="input-group col-md-7" style="margin-bottom: 10px;">                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid" ng-model="WBCcomment">                        <div class="input-group-btn">                          <button type="button" class="btn btn-primary" ng-click="addComment()">Add</button>                        </div>                      </div><!-- /input-group -->                      <div class="col-md-8 col-md-offset-3">                        <ul>                          <!-- ngRepeat: comment in comments -->                        </ul>                      </div>                  </div>                </div>              </div>              <div class="panel panel-default ng-scope" ng-controller="PlateletController as PltCtrl">                <div class="panel-heading">                  <h3 class="panel-title">Platelet Morphology <a data-toggle="collapse" href="http://www.ouhsc.edu/pathologyresidency/posters/websites/peripheral/#PltPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>                </div>                <div class="panel-body collapse in" id="PltPanelBody">                  <div class="row">                    <label class="col-md-3" style="text-align:right">Platelets</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default" ng-class="{active:PltCtrl.isSelected(&#39;num&#39;,1)}" ng-click="PltCtrl.select(&#39;num&#39;,1)">Decreased</a>                        <a type="button" class="btn btn-default active" ng-class="{active:PltCtrl.isSelected(&#39;num&#39;,2)}" ng-click="PltCtrl.select(&#39;num&#39;,2)">Normal</a>                        <a type="button" class="btn btn-default" ng-class="{active:PltCtrl.isSelected(&#39;num&#39;,3)}" ng-click="PltCtrl.select(&#39;num&#39;,3)">Increased</a>                      </div>                    </div>                  </div>                  <div class="row">                    <label class="col-md-3" style="text-align:right">Morphology</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:norm}" ng-click="PltCtrl.select(&#39;norm&#39;,1)">Normal</a>                        <a type="button" class="btn btn-default" ng-class="{active:large}" ng-click="PltCtrl.select(&#39;large&#39;,2)">Large</a>                        <a type="button" class="btn btn-default" ng-class="{active:giant}" ng-click="PltCtrl.select(&#39;giant&#39;,3)">Giant</a>                        <a type="button" class="btn btn-default" ng-class="{active:hypo}" ng-click="PltCtrl.select(&#39;hypo&#39;,4)">Hypogranular</a>                      </div>                    </div>                  </div>                  <div class="row">                    <label class="col-md-3" style="text-align:right">Clumping</label>                    <div class="col-sm-9">                      <div class="btn-group btn-group-sm btn-group-justified" role="group">                        <a type="button" class="btn btn-default active" ng-class="{active:PltCtrl.isSelected(&#39;clumps&#39;,1)}" ng-click="PltCtrl.select(&#39;clumps&#39;,1)">None</a>                        <a type="button" class="btn btn-default" ng-class="{active:PltCtrl.isSelected(&#39;clumps&#39;,2)}" ng-click="PltCtrl.select(&#39;clumps&#39;,2)">Rare</a>                        <a type="button" class="btn btn-default" ng-class="{active:PltCtrl.isSelected(&#39;clumps&#39;,3)}" ng-click="PltCtrl.select(&#39;clumps&#39;,3)">Significant</a>                      </div>                    </div>                  </div>                  <br>                  <div class="row">                    <div class="col-md-4">                      <label>Additional Comments</label>                    </div>                      <div class="input-group col-md-7">                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid" ng-model="PLTcomment">                        <div class="input-group-btn">                          <button type="button" class="btn btn-primary" ng-click="addComment()">Add</button>                        </div>                      </div><!-- /input-group -->                      <div class="col-md-8 col-md-offset-3">                        <ul>                          <!-- ngRepeat: comment in comments -->                        </ul>                      </div>                  </div>                </div>              </div>              <div class="panel panel-default ng-scope" ng-controller="ImpressionController">                <div class="panel-heading">                  <h3 class="panel-title">Impression <a data-toggle="collapse" href="http://www.ouhsc.edu/pathologyresidency/posters/websites/peripheral/#ImpPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>                </div>                <div class="panel-body collapse in" id="ImpPanelBody">                  <div class="row">                    <div class="col-md-12" style="margin-bottom: 10px;">                      <div class="input-group">                        <div class="input-group-btn">                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Diagnosis <span class="caret"></span></button>                          <ul class="dropdown-menu" role="menu">                            <li><a href="" ng-click="addDiagnosis(&#39;Hypochromic, normocytic anemia&#39;)">Hypochromic, normocytic anemia</a></li>                            <li><a href="" ng-click="addDiagnosis(&#39;Normochromic, normocytic anemia&#39;)">Normochromic, normocytic anemia</a></li>                            <li class="divider"></li>                            <li><a href="" ng-click="addDiagnosis(&#39;Leukocytosis&#39;)">Leukocytosis</a></li>                            <li><a href="" ng-click="addDiagnosis(&#39;Leukocytopenia&#39;)">Leukopenia</a></li>                            <li class="divider"></li>                            <li><a href="" ng-click="addDiagnosis(&#39;Thrombocytosis&#39;)">Thrombocytosis</a></li>                            <li><a href="" ng-click="addDiagnosis(&#39;Thrombocytopenia&#39;)">Thrombopenia</a></li>                          </ul>                        </div><!-- /btn-group -->                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid" ng-model="DiagnosisText">                        <div class="input-group-btn">                          <button type="button" class="btn btn-primary" ng-click="addToImpression(DiagnosisText)">Add</button>                        </div>                      </div><!-- /input-group -->                    </div><!-- /.col-lg-6 -->                </div>                <div class="row">                  <div class="col-md-12">                    <!-- ngIf: impressions.length > 0 -->                  </div>                </div>              </div>          </div>              <div class="panel panel-default ng-scope" id="CommentPanel" ng-controller="CommentController">                <div class="panel-heading">                  <h3 class="panel-title">Comments <a data-toggle="collapse" href="http://www.ouhsc.edu/pathologyresidency/posters/websites/peripheral/#CommPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>                </div>                <div class="panel-body collapse in" id="CommPanelBody">                  <form class="ng-pristine ng-valid">                    <div class="form-group">                      <label>Opening Text</label>                      <textarea class="form-control ng-pristine ng-untouched ng-valid" rows="2" placeholder="Enter Opening Comments" ng-model="XComments1"></textarea>                    </div>                    <table class="table table-condensed">                      <thead>                        <tr>                          <th>RBC Comments</th>                        </tr>                      </thead>                      <tbody>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="NormoChromicAnemia" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Normochromic Anemia</td>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="Schists" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Schistocytes</td>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="Spherocytes" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Spherocytes</td>                          <td class=""><input type="checkbox" ng-model="MicrocyticAnemia" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Microcytic Anemia</td>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="MacrocyticAnemia" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Macrocytic Anemia</td>                        </tr>                      </tbody>                    </table>                    <table class="table table-condensed">                      <thead>                        <tr>                          <th>WBC Comments</th>                        </tr>                      </thead>                      <tbody>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="Leukopenia" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Leukopenia</td>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="Neutrophilia" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Neutrophilia</td>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="lympocytosis" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Lympocytosis</td>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="lymphopenia" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Lymphopenia</td>                        </tr>                        <tr>                          <td><input type="checkbox" ng-model="BlastComment" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Blast, acute leukemia</td>                        </tr>                      </tbody>                    </table>                    <table class="table table-condensed">                      <thead>                        <tr>                          <th>Plt Comments</th>                        </tr>                      </thead>                      <tbody>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="thrombocytopenia" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Thrombocytopenia</td>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="thrombocytopeniaNeo" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Thrombocytopenia, neonatal</td>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="TTP" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Thrombocytopenia, TTP/HUS/HELLP</td>                          <td><input type="checkbox" ng-model="ThromboReactive" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Thrombocytosis</td>                        </tr>                      </tbody>                    </table>                    <table class="table table-condensed">                      <thead>                        <tr>                          <th>Other Comments</th>                        </tr>                      </thead>                      <tbody>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="pancytopenia" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Pancytopenia</td>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="pancytopeniaBMT" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Pancytopenia, post BMT</td>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" ng-model="LGL" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> LGL comment</td>                          <td><input type="checkbox" ng-model="Haptoglobin" ng-click="buildComments()" class="ng-pristine ng-untouched ng-valid"> Increased haptoglobin</td>                        </tr>                      </tbody>                    </table>                    <div class="form-group">                      <label>Closing Text</label>                      <textarea class="form-control ng-pristine ng-untouched ng-valid" rows="2" placeholder="Enter Closing Comments... if needed" ng-model="XComments2"></textarea>                    </div>                  </form>                  <p class="ng-binding"> </p>                </div>              </div>              <div class="panel panel-default ng-scope" ng-controller="SignatureController">                <div class="panel-heading">                  <h3 class="panel-title">Signature <a data-toggle="collapse" href="http://www.ouhsc.edu/pathologyresidency/posters/websites/peripheral/#SigPanelBody"><span class="glyphicon glyphicon-triangle-bottom pull-right"></span></a></h3>                </div>                <div class="panel-body collapse in" id="SigPanelBody">                  <form class="form-horizontal ng-pristine ng-valid">                    <div class="form-group">                      <div>                        <label class="col-sm-4 control-label">Pathologist Name</label>                          <div class="col-sm-8">                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid" ng-model="Name" ng-change="UpdateSignature()">                          </div>                      </div>                      <div>                        <label class="col-sm-4 control-label">Resident?</label>                        <div class="col-sm-8">                          <input type="checkbox" style="margin-top:10px" ng-model="resident" class="ng-pristine ng-untouched ng-valid">                        </div>                        <label class="col-sm-8 control-label">&nbsp;</label>                      </div>                      <div ng-show="resident" class="ng-hide">                        <label class="col-sm-4 control-label">Resident Name</label>                        <div class="col-sm-8">                          <input type="text" class="form-control ng-pristine ng-untouched ng-valid" ng-model="resName" ng-change="UpdateSignature()">                        </div>                      </div>                    </div>                    <table class="table table-condensed">                      <thead>                        <tr>                          <th>ICD-10 Codes</th>                        </tr>                      </thead>                      <tbody>                        <tr>                          <th>RBC Findings</th>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D64.9'" ng-click="UpdateSignature()" > D64.9 Normocytic anemia w/o blood loss</td>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D53.9'" ng-click="UpdateSignature()" > D53.9 Macrocytic anemia</td>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D50.9'" ng-click="UpdateSignature()" > D50.9 Microcytic anemia/ Fe deficiency</td>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D57.1'" ng-click="UpdateSignature()" > D57.1 Sickle cell disease, unspecified</td>                        </tr>                        <tr>                          <th>WBC Findings</th>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D72.829'" ng-click="UpdateSignature()" > D72.829 Leukocytosis, unspecified</td>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D72.1'" ng-click="UpdateSignature()" > D72.1 Leukocytosis, eosinophilic</td>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D72.828'" ng-click="UpdateSignature()" ng-model="checked" > D72.828 Other elevated white blood cell count</td>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D72.819'" ng-click="UpdateSignature()" ng-model="checked" > D72.819 Leukocytopenia, unspecified</td>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D70.9'" ng-click="UpdateSignature()" > D70.9 Neutropenia, unspecified</td>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D72.810'" ng-click="UpdateSignature()" > D72.810 Lymphocytopenia</td>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D72.818'" ng-click="UpdateSignature()"> D72.818 Leukopenia (basophilic, eosinophilic, monocytopenia, or plasmacytopenia)</td>                        </tr>                        <tr>                          <th>Platelet Findings</th>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D69.6'" ng-click="UpdateSignature()" > D69.6 Thrombocytopenia, unspecified</td>                        </tr>                        <tr>                          <th>Other</th>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D61.818'" ng-click="UpdateSignature()" > D61.818 Pancytopenia, "other"</td>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'D75.9'" ng-click="UpdateSignature()" > D75.9 Unspecified diseases of blood and blood-forming organs</td>                        </tr>                        <tr>                          <td class="tdwidth tdw"><input type="checkbox" checklist-model='ICD9s' checklist-value="'Z00.00'" ng-click="UpdateSignature()" > Z00.00 Laboratory examination, unspecified</td>                        </tr>                      </tbody>                    </table>                  </form>                </div>                <!--    <div class="col-md-12">-->                <!--      <div class="input-group">-->                <!--        <label>Pathologist Name</label>-->                <!--        <input type="text" class="form-control" ng-model='Name' ng-change='UpdateSignature()'>-->                <!--        <br>-->                <!--        <input type='checkbox' ng-model='resident'><label>Resident?</label>-->                <!--        <br>-->                <!--        <label ng-show='resident'>Resident Name</label>-->                <!--        <input type='text' ng-show='resident' ng-model='resName'>-->                <!--      </div><!-- /input-group -->                <!--    </div><!-- /.col-lg-6 -->                <!--</div>-->          </div></div></div></body></html>
